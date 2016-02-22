@@ -1,0 +1,41 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+
+  "Description": "Demonstration of encryption using KMS in a CloudFormation Template",
+
+  "Parameters": {
+    "SuperSecretThing": {
+      "Description": "Some password or other thing that has to be secure",
+      "Type": "String",
+      "Default": "This could be anything . . . ",
+      "NoEcho": true
+    },
+    "KmsKeyId": {
+      "Description": "The key ID of the AWS KMS key to be used for encryption",
+      "Type": "String"
+    },
+    "LambdaEncryptionResourceArn": {
+      "Description": "The ARN of the AWS Lambda function backing the encryption custom resource",
+      "Type": "String"
+    }
+  },
+
+  "Resources": {
+    "EncryptedSuperSecretThing": {
+      "Type": "AWS::CloudFormation::CustomResource",
+      "Version": "1.0",
+      "Properties": {
+        "ServiceToken": {"Ref": "LambdaEncryptionResourceArn"},
+        "KeyId": {"Ref": "KmsKeyId"},
+        "PlainText": {"Ref": "SuperSecretThing"}
+      }
+    }
+  },
+
+  "Outputs": {
+    "EncryptedSuperSecretThing": {
+      "Value": {"Fn::GetAtt": ["EncryptedSuperSecretThing", "CipherText"]},
+      "Description": "KMS encrypted value of SuperSecretThing (Base64 encoded)"
+    }
+  }
+}
