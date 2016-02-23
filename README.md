@@ -11,8 +11,8 @@ usage of the custom resource.
 
 For additional information, please read the in-depth article on 
 implementing this custom resource at 
-[https://ben.fogbutter.com/2016/02/22/create-cloud-formation-stack-kms.html]
-(https://ben.fogbutter.com/2016/02/22/create-cloud-formation-stack-kms.html)
+[https://ben.fogbutter.com/2016/02/22/using-kms-to-encrypt-cloud-formation-values.html]
+(https://ben.fogbutter.com/2016/02/22/using-kms-to-encrypt-cloud-formation-values.html)
 
 ### Syntax
 
